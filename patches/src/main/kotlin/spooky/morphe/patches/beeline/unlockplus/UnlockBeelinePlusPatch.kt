@@ -18,12 +18,12 @@ import spooky.morphe.patches.shared.Constants.COMPATIBILITY_BEELINE
 @Suppress("unused")
 val unlockBeelinePlusPatch = bytecodePatch(
     name = "Unlock Beeline Plus features",
-    description = "Unlocks Beeline plus features such as round-trip generation, live traffic and premium map types.
+    description = """Unlocks Beeline plus features such as round-trip generation, live traffic and premium map types.
     The following patches are also needed for this patch to work:
         - Fix Firebase after re-signing (rushiranpise/morphe-patches)
         - Provide Original app certificate (rushiranpise/morphe-patches)
         - Spoof app signature (rushiranpise/morphe-patches)
-        - Spoof install source (rushiranpise/morphe-patches)",
+        - Spoof install source (rushiranpise/morphe-patches)""",
     default = true
 ) {
     compatibleWith(COMPATIBILITY_BEELINE)
