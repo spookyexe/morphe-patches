@@ -3,5 +3,5 @@ extension {
 }
 
 android {
-    namespace = "app.template.extension"
+    namespace = "spooky.morphe.extension"
 }

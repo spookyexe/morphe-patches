@@ -1,12 +1,11 @@
-group = "app.template"
+group = "spooky.morphe"
 
 patches {
-    // TODO: Update this section with your project details.
     about {
-        name = "UserXYZ Patches"
-        description = "Patches for apps I like"
-        source = "git@github.com:UserXYZ/morphe-patches.git"
-        author = "Awesome dev"
+        name = "Spooky Patches"
+        description = "Patches you won't see elsewhere"
+        source = "git@github.com:spookyexe/morphe-patches.git"
+        author = "spookyexe"
         contact = "na"
         website = "na"
         license = "GPLv3"
@@ -25,6 +24,7 @@ val patchListGeneratorClasspath = configurations.create("patchListGeneratorClass
 
 dependencies {
     compileOnly(libs.gson)
+    implementation(libs.morphe.patches.library)
     patchListGeneratorClasspath(libs.gson)
 }
 

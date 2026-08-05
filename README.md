@@ -78,9 +78,9 @@ Or manually add this repository url as a patch source in Morphe: https://github.
 
 ### 🛠️ Building
 
-To build UserXYZ Patches,
+To build Spooky Patches,
 you can follow the [Morphe documentation](https://github.com/MorpheApp/morphe-documentation).
 
 ## 📜 License
 
-UserXYZ Patches are licensed under the [GNU General Public License v3.0](LICENSE)
+Spooky Patches are licensed under the [GNU General Public License v3.0](LICENSE)
