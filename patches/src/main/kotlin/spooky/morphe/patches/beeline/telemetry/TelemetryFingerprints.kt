@@ -1,6 +1,7 @@
 package spooky.morphe.patches.beeline.telemetry
 
 import app.morphe.patcher.Fingerprint
+import com.android.tools.smali.dexlib2.AccessFlags
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Fingerprints for Beeline telemetry disable patch.
@@ -55,12 +56,23 @@ object FirebaseCrashlyticsRecordExceptionFingerprint : Fingerprint(
 )
 
 /**
- * Mapbox Telemetry — `MapTelemetry.setUserTelemetryRequestState(boolean)`.
- * Patching this prevents the app from enabling Mapbox map usage telemetry.
+ * Mapbox Telemetry funnel — `MapTelemetryImpl.enableTelemetryCollection(Z)`.
+ *
+ * IMPORTANT: `com.mapbox.maps.module.MapTelemetry` is an INTERFACE — its
+ * `setUserTelemetryRequestState(Z)V` is an abstract declaration with no code
+ * body, and patching it crashes `addInstructions` with an NPE. The concrete
+ * implementation lives in `com.mapbox.maps.module.telemetry.MapTelemetryImpl`.
+ *
+ * `enableTelemetryCollection(Z)` is the only Java caller of the native
+ * `TelemetryUtils.setEventsCollectionState(Z, callback)` in this build (both
+ * `setUserTelemetryRequestState` and `disableTelemetrySession` funnel through
+ * it), so forcing it to pass `false` switches Mapbox collection off
+ * deterministically regardless of what the app requests.
  */
-object MapboxTelemetryRequestStateFingerprint : Fingerprint(
-    definingClass = "Lcom/mapbox/maps/module/MapTelemetry;",
-    name = "setUserTelemetryRequestState",
+object MapboxTelemetryCollectionStateFingerprint : Fingerprint(
+    definingClass = "Lcom/mapbox/maps/module/telemetry/MapTelemetryImpl;",
+    name = "enableTelemetryCollection",
+    accessFlags = listOf(AccessFlags.PRIVATE),
     returnType = "V",
     parameters = listOf("Z"),
 )
