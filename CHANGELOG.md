@@ -1,3 +1,9 @@
+## [1.1.0-dev.3](https://github.com/spookyexe/morphe-patches/compare/v1.1.0-dev.2...v1.1.0-dev.3) (2026-11-12)
+
+### ✨ New Features
+
+* improve beeline premium patch & add support for version 4.2.8014 ([409d7fc](https://github.com/spookyexe/morphe-patches/commit/409d7fc5a84c413e34bfe001508dde83250467ab))
+
 ## [1.1.0-dev.2](https://github.com/spookyexe/morphe-patches/compare/v1.1.0-dev.1...v1.1.0-dev.2) (2026-11-12)
 
 ### 🐛 Bug Fixes
