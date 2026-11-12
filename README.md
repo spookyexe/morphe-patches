@@ -7,19 +7,20 @@ This repo contains some patches I made for myself. Feel free to use them and sug
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.0.0](https://github.com/spookyexe/morphe-patches/releases/tag/v1.0.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;1 patches total
+> **[v1.1.0-dev.3](https://github.com/spookyexe/morphe-patches/releases/tag/v1.1.0-dev.3)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;2 patches total
 <details open>
-<summary>📦 Beeline&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<summary>📦 Beeline&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
 
 **🎯 Supported versions:**
 
-| 4.2.8014 |
-| :---: |
+| 4.2.8014 | 4.2.8704 |
+| :---: | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [Unlock Beeline Plus features](#unlock-beeline-plus-features) | Unlocks Beeline plus features such as round-trip generation, live traffic and premium map types. |  |
+| [Disable Beeline telemetry](#disable-beeline-telemetry) | Stops Beeline from sending usage and crash telemetry to remote servers.<br><br>Disables:<br>- Segment Analytics (track / screen / identify events)<br>- Firebase Analytics (logEvent)<br>- Firebase Crashlytics (log messages, recorded exceptions)<br>- Mapbox map telemetry (events collection switched off at the SDK level)<br><br>Does not affect app functionality — only telemetry collection is<br>suppressed. Navigation, routing, maps and Plus features all keep working. |  |
+| [Unlock Beeline Plus features](#unlock-beeline-plus-features) | Unlocks Beeline plus features such as round-trip generation, live traffic and premium map types.<br>    The following patches are also needed for this patch to work:<br>        - Fix Firebase after re-signing (rushiranpise/morphe-patches)<br>        - Provide Original app certificate (rushiranpise/morphe-patches)<br>        - Spoof app signature (rushiranpise/morphe-patches)<br>        - Spoof install source (rushiranpise/morphe-patches) |  |
 
 </details>
 
