@@ -54,25 +54,3 @@ object FirebaseCrashlyticsRecordExceptionFingerprint : Fingerprint(
     returnType = "V",
     parameters = listOf("Ljava/lang/Throwable;"),
 )
-
-/**
- * Mapbox Telemetry funnel — `MapTelemetryImpl.enableTelemetryCollection(Z)`.
- *
- * IMPORTANT: `com.mapbox.maps.module.MapTelemetry` is an INTERFACE — its
- * `setUserTelemetryRequestState(Z)V` is an abstract declaration with no code
- * body, and patching it crashes `addInstructions` with an NPE. The concrete
- * implementation lives in `com.mapbox.maps.module.telemetry.MapTelemetryImpl`.
- *
- * `enableTelemetryCollection(Z)` is the only Java caller of the native
- * `TelemetryUtils.setEventsCollectionState(Z, callback)` in this build (both
- * `setUserTelemetryRequestState` and `disableTelemetrySession` funnel through
- * it), so forcing it to pass `false` switches Mapbox collection off
- * deterministically regardless of what the app requests.
- */
-object MapboxTelemetryCollectionStateFingerprint : Fingerprint(
-    definingClass = "Lcom/mapbox/maps/module/telemetry/MapTelemetryImpl;",
-    name = "enableTelemetryCollection",
-    accessFlags = listOf(AccessFlags.PRIVATE),
-    returnType = "V",
-    parameters = listOf("Z"),
-)

@@ -12,10 +12,6 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
 import spooky.morphe.patches.shared.Constants.COMPATIBILITY_BEELINE
 
-private const val TELEMETRY_UTILS_CLASS = "Lcom/mapbox/common/TelemetryUtils;"
-private const val SET_COLLECTION_STATE =
-    "$TELEMETRY_UTILS_CLASS->setEventsCollectionState(ZLcom/mapbox/common/TelemetryUtilsResponseCallback;)V"
-
 /**
  * No-op a void method found by [this] fingerprint, safely.
  *
@@ -80,59 +76,13 @@ val disableBeelineTelemetryPatch = bytecodePatch(
     compatibleWith(COMPATIBILITY_BEELINE)
 
     execute {
-        // ─── Segment Analytics ─────────────────────────────────────────────
-        // wc.c(Event) is the central dispatch for all Segment events.
         SegmentAnalyticsDispatchFingerprint.noopVoid("Segment Analytics dispatch (wc.c)")
 
-        // ─── Firebase Analytics ────────────────────────────────────────────
         FirebaseAnalyticsLogEventFingerprint.noopVoid("Firebase Analytics logEvent")
 
-        // ─── Firebase Crashlytics ──────────────────────────────────────────
         FirebaseCrashlyticsLogFingerprint.noopVoid("Firebase Crashlytics log(String)")
         FirebaseCrashlyticsRecordExceptionFingerprint.noopVoid(
             "Firebase Crashlytics recordException(Throwable)"
         )
-
-        // ─── Mapbox Telemetry ──────────────────────────────────────────────
-        // A plain no-op of enableTelemetryCollection would leave Mapbox's SDK
-        // default state in place, so instead force the boolean passed to the
-        // native switch to 0 (false) — the same state Beeline's own opt-out
-        // dialog produces — making collection off deterministically.
-        //
-        // Body of enableTelemetryCollection(Z):
-        //   new-instance p0, Ltz4;              # response callback (reuses p0)
-        //   const/16  v0, 0x14
-        //   invoke-direct {p0, v0}, Ltz4;-><init>(I)V
-        //   invoke-static {p1, p0}, TelemetryUtils;->setEventsCollectionState(ZLcom/mapbox/common/TelemetryUtilsResponseCallback;)V
-        //   return-void
-        // p0 = callback (registerB), p1 = state flag (registerA). Replace the
-        // invoke with const/4 v<p1>, 0x0 + the same invoke re-emitted.
-        val funnel = MapboxTelemetryCollectionStateFingerprint.methodOrNull
-        if (funnel == null) {
-            println("Telemetry: Mapbox funnel (MapTelemetryImpl.enableTelemetryCollection) not found — skipping")
-        } else {
-            val instructionList = funnel.instructionsOrNull?.toList()
-            if (instructionList == null) {
-                println("Telemetry: Mapbox funnel matched a bodyless method — skipping")
-            } else {
-                val invokeIndex = instructionList.indexOfFirst { instr ->
-                    ((instr as? ReferenceInstruction)?.reference as? MethodReference)
-                        ?.let { it.definingClass == TELEMETRY_UTILS_CLASS && it.name == "setEventsCollectionState" }
-                        ?: false
-                }
-                val invoke = instructionList.getOrNull(invokeIndex) as? FiveRegisterInstruction
-                if (invokeIndex < 0 || invoke == null) {
-                    println("Telemetry: setEventsCollectionState call not found inside Mapbox funnel — skipping")
-                } else {
-                    val stateReg = invoke.registerA       // p1 — the boolean flag
-                    val callbackReg = invoke.registerB    // p0 — response callback
-                    funnel.replaceInstruction(invokeIndex, "const/4 v$stateReg, 0x0")
-                    funnel.addInstruction(invokeIndex + 1, "invoke-static {v$stateReg, v$callbackReg}, $SET_COLLECTION_STATE")
-                    println("Telemetry: Mapbox events collection forced OFF (setEventsCollectionState(false)).")
-                }
-            }
-        }
-
-        println("Telemetry: Beeline telemetry patch applied.")
     }
 }
