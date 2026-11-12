@@ -7,7 +7,7 @@ This repo contains some patches I made for myself. Feel free to use them and sug
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.1.0-dev.1](https://github.com/spookyexe/morphe-patches/releases/tag/v1.1.0-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;2 patches total
+> **[v1.1.0-dev.2](https://github.com/spookyexe/morphe-patches/releases/tag/v1.1.0-dev.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;2 patches total
 <details open>
 <summary>📦 Beeline&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
@@ -19,7 +19,7 @@ This repo contains some patches I made for myself. Feel free to use them and sug
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [Disable Beeline telemetry](#disable-beeline-telemetry) | Stops Beeline from sending usage and crash telemetry to remote servers.<br><br>Disables:<br>- Segment Analytics (track / screen / identify events)<br>- Firebase Analytics (logEvent)<br>- Firebase Crashlytics (log messages, recorded exceptions)<br>- Mapbox map telemetry (user telemetry request state)<br><br>Does not affect app functionality — only telemetry collection is<br>suppressed. Navigation, routing, maps and Plus features all keep working. |  |
+| [Disable Beeline telemetry](#disable-beeline-telemetry) | Stops Beeline from sending usage and crash telemetry to remote servers.<br><br>Disables:<br>- Segment Analytics (track / screen / identify events)<br>- Firebase Analytics (logEvent)<br>- Firebase Crashlytics (log messages, recorded exceptions)<br>- Mapbox map telemetry (events collection switched off at the SDK level)<br><br>Does not affect app functionality — only telemetry collection is<br>suppressed. Navigation, routing, maps and Plus features all keep working. |  |
 | [Unlock Beeline Plus features](#unlock-beeline-plus-features) | Unlocks Beeline plus features such as round-trip generation, live traffic and premium map types.<br>    The following patches are also needed for this patch to work:<br>        - Fix Firebase after re-signing (rushiranpise/morphe-patches)<br>        - Provide Original app certificate (rushiranpise/morphe-patches)<br>        - Spoof app signature (rushiranpise/morphe-patches)<br>        - Spoof install source (rushiranpise/morphe-patches) |  |
 
 </details>
