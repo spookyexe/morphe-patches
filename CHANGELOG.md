@@ -1,3 +1,9 @@
+## [1.1.0-dev.4](https://github.com/spookyexe/morphe-patches/compare/v1.1.0-dev.3...v1.1.0-dev.4) (2026-11-14)
+
+### ✨ New Features
+
+* add support for Beeline 4.2.9196 ([cfcfa60](https://github.com/spookyexe/morphe-patches/commit/cfcfa6081b1e4adaa4ead45b10b2416dbf0ac6db))
+
 ## [1.1.0-dev.3](https://github.com/spookyexe/morphe-patches/compare/v1.1.0-dev.2...v1.1.0-dev.3) (2026-11-12)
 
 ### ✨ New Features
