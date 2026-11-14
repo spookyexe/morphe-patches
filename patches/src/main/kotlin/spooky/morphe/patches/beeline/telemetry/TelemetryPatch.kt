@@ -5,7 +5,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.instructionsOrNull
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
-import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patcher.patch.patch
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
@@ -57,7 +57,7 @@ private fun Fingerprint.noopVoid(label: String) {
  * interact with any of them.
  */
 @Suppress("unused")
-val disableBeelineTelemetryPatch = bytecodePatch(
+val disableBeelineTelemetryPatch = patch(
     name = "Disable Beeline telemetry",
     description = """
         Stops Beeline from sending usage and crash telemetry to remote servers.
