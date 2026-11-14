@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-11-14T22:33:47",
-  "description": "## [1.1.0](https://github.com/spookyexe/morphe-patches/compare/v1.0.0...v1.1.0) (2026-11-14)\n\n### ✨ New Features\n\n* add support for Beeline 4.2.9196 ([cfcfa60](https://github.com/spookyexe/morphe-patches/commit/cfcfa6081b1e4adaa4ead45b10b2416dbf0ac6db))\n* Add telemetry patch for Beeline ([7f2145d](https://github.com/spookyexe/morphe-patches/commit/7f2145d9ab2bec36c944190b7e96ffa8671e97ef))\n* Import rushiranpise's signature bypass, firebase certificate & ([87b5652](https://github.com/spookyexe/morphe-patches/commit/87b5652d5d558b34ed8e71c66358e24b73105585))\n* improve beeline premium patch & add support for version 4.2.8014 ([409d7fc](https://github.com/spookyexe/morphe-patches/commit/409d7fc5a84c413e34bfe001508dde83250467ab))\n\n### 🐛 Bug Fixes\n\n* beeline telemetry patch ([d6ae694](https://github.com/spookyexe/morphe-patches/commit/d6ae6947d56ab546c9b0ce6f7423844927dc07b8))\n* telemetry patch for Beeline ([273e8e9](https://github.com/spookyexe/morphe-patches/commit/273e8e9046e09f5b779f4d791ccc30f2cd316e75))",
-  "download_url": "https://github.com/spookyexe/morphe-patches/releases/download/v1.1.0/patches-1.1.0.mpp",
+  "created_at": "2026-11-14T22:47:38",
+  "description": "## [1.1.1](https://github.com/spookyexe/morphe-patches/compare/v1.1.0...v1.1.1) (2026-11-14)\n\n### 🐛 Bug Fixes\n\n* some build warnings in shared patches ([f12ef71](https://github.com/spookyexe/morphe-patches/commit/f12ef712ff4d236c8accc667563c1c5f1cb3d57e))",
+  "download_url": "https://github.com/spookyexe/morphe-patches/releases/download/v1.1.1/patches-1.1.1.mpp",
   "signature_download_url": "",
-  "version": "1.1.0"
+  "version": "1.1.1"
 }

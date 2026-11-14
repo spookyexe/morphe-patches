@@ -1,3 +1,9 @@
+## [1.1.1](https://github.com/spookyexe/morphe-patches/compare/v1.1.0...v1.1.1) (2026-11-14)
+
+### 🐛 Bug Fixes
+
+* some build warnings in shared patches ([f12ef71](https://github.com/spookyexe/morphe-patches/commit/f12ef712ff4d236c8accc667563c1c5f1cb3d57e))
+
 ## [1.1.0](https://github.com/spookyexe/morphe-patches/compare/v1.0.0...v1.1.0) (2026-11-14)
 
 ### ✨ New Features
