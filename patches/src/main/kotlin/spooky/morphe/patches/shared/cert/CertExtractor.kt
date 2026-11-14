@@ -4,8 +4,11 @@
  */
 package spooky.morphe.patches.shared.cert
 
-import app.morphe.patcher.patch.rawResourcePatch
+import app.morphe.patcher.patch.patch
 import app.morphe.patcher.patch.stringOption
+import app.morphe.patcher.patch.packageMetadata
+import app.morphe.patcher.patch.resourceFile
+import app.morphe.patcher.patch.document
 import java.io.ByteArrayInputStream
 import java.io.File
 import java.io.InputStream
@@ -152,7 +155,7 @@ internal fun extractFromFile(file: File, source: String = "extracted"): Boolean 
  * You can also paste cert values directly if you already have them
  * (e.g. from APKMirror or apksigner).
  */
-val extractApkCertificatePatch = rawResourcePatch(
+val extractApkCertificatePatch = patch(
     name = "Provide Original app certificate",
     description = "Automatically reads the signing certificate from the APK you are patching — " +
             "no original app installed or file provided needed. " +
@@ -218,9 +221,9 @@ val extractApkCertificatePatch = rawResourcePatch(
         }
 
         // Strategy 0b: META-INF v1 signature — fallback for APKs signed only with JAR/v1 scheme.
-        // get() operates on base.apk content so works for all split formats too.
+        // resourceFile() operates on base.apk content so works for all split formats too.
         try {
-            val metaInfDir = get("META-INF", copy = false)
+            val metaInfDir = resourceFile("META-INF", copy = false)
             val certFile = metaInfDir.listFiles()
                 ?.firstOrNull { it.isFile && isCertEntry("META-INF/${it.name}") }
             if (certFile != null) {
@@ -257,9 +260,10 @@ val extractApkCertificatePatch = rawResourcePatch(
 
         // Strategy 1: installed app sourceDir
         try {
-            val manifestText = get("AndroidManifest.xml").readText()
-            val pkgName = Regex("""package="([^"]+)"""").find(manifestText)?.groupValues?.get(1)
-                ?: throw Exception("pkg not found")
+            val pkgName = document("AndroidManifest.xml").use { doc ->
+                doc.getElementsByTagName("manifest").item(0).attributes.getNamedItem("package").nodeValue
+                    ?: throw Exception("pkg not found")
+            }
             val ctx = Class.forName("android.app.ActivityThread")
                 .getDeclaredMethod("currentApplication").apply { isAccessible = true }
                 .invoke(null) ?: throw Exception("null ctx")
