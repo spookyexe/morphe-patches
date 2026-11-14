@@ -1,4 +1,4 @@
-## [1.1.1-dev.1](https://github.com/spookyexe/morphe-patches/compare/v1.1.0...v1.1.1-dev.1) (2026-11-14)
+## [1.1.1](https://github.com/spookyexe/morphe-patches/compare/v1.1.0...v1.1.1) (2026-11-14)
 
 ### 🐛 Bug Fixes
 
