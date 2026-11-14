@@ -8,9 +8,10 @@ import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.patch.PatchException
-import app.morphe.patcher.patch.resourcePatch
+import app.morphe.patcher.patch.patch
 import app.morphe.patcher.patch.classDefForEach
 import app.morphe.patcher.patch.mutableClassDefBy
+import app.morphe.patcher.patch.document
 import spooky.morphe.patches.shared.cert.autoBase64Der
 import spooky.morphe.patches.shared.cert.extractApkCertificatePatch
 import app.morphe.patcher.patch.patch
@@ -53,7 +54,7 @@ internal val SignatureHookAppStaticInitFingerprint = Fingerprint(
 /**
  * Reads [extractedPackageName] from AndroidManifest.xml.
  */
-internal val extractPackageNamePatch = resourcePatch {
+internal val extractPackageNamePatch = patch {
     execute {
         document("AndroidManifest.xml").use { doc ->
             extractedPackageName = (doc.getElementsByTagName("manifest").item(0) as Element)
@@ -68,7 +69,7 @@ internal val extractPackageNamePatch = resourcePatch {
  * This replaces the app's Application subclass with our hooked one.
  * If the app already has a custom Application, we handle that in bytecode via setSuperClass.
  */
-internal val injectSignatureHookAppPatch = resourcePatch {
+internal val injectSignatureHookAppPatch = patch {
     execute {
         document("AndroidManifest.xml").use { doc ->
             val application = doc.getElementsByTagName("application").item(0) as Element
