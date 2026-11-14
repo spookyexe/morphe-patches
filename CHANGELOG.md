@@ -1,3 +1,9 @@
+## [1.1.0-dev.5](https://github.com/spookyexe/morphe-patches/compare/v1.1.0-dev.4...v1.1.0-dev.5) (2026-11-14)
+
+### ✨ New Features
+
+* Import rushiranpise's signature bypass, firebase certificate & ([87b5652](https://github.com/spookyexe/morphe-patches/commit/87b5652d5d558b34ed8e71c66358e24b73105585))
+
 ## [1.1.0-dev.4](https://github.com/spookyexe/morphe-patches/compare/v1.1.0-dev.3...v1.1.0-dev.4) (2026-11-14)
 
 ### ✨ New Features
